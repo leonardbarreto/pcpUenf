@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<div class="resultado">
+		<button type="button" id="result" class="btn btn-primary">Resultado</button>
+		<div class="res">
+			
+		</div>
+	</div>
+
+	
+
+</body>
+<script type="text/javascript">
+	
+	$('#result').click(function(){
+		$.each(list, function(index,value){
+			console.log(value);
+		})
+	});
+	
+	$('#btn_next1').click(function(){
+		$('#exampleModalq3').modal({backdrop: 'static', keyboard: false});
+	});
+
+	$("#exampleModalq3").on("hidden.bs.modal", function () {
+		$('#content').load('q4.html');		
+	});
+	
+	// Verificar qual radio está marcado e gravar no array
+	$('#response').click(function() {
+		var result = $("input:radio[name ='customRadio']:checked").val();
+		list.push(result);
+		$('#btn_next1').prop('disabled', false);
+		$('#response').prop('disabled', true);
+		$(".alert").show();
+	});
+</script>
+</html>

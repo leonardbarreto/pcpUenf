@@ -6,27 +6,32 @@
 
 </head>
 <body>
+
+	<div class="alert alert-success hide" id="alert">
+		<strong>Well done!</strong> You successfully read this important alert message.
+	</div>
+
 	<p>Questão 1</p>
 
 	<div class="custom-control custom-radio">
-		<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="1" />
+		<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="a" />
 		<label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
 	</div>
 	<div class="custom-control custom-radio">
-		<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="2" />
+		<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="b" />
 		<label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
 	</div>
 	<div class="custom-control custom-radio">
-		<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="3" />
+		<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="c" />
 		<label class="custom-control-label" for="customRadio3">Or toggle this other custom radio</label>
 	</div>
 	<div class="custom-control custom-radio">
-		<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="4" />
+		<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="d" />
 		<label class="custom-control-label" for="customRadio4">Or toggle this other custom radio</label>
 	</div>
 
 	<button type="button" id="response" class="btn btn-primary">Responder</button>
-	<button type="button" id="btn_next1" class="btn btn-primary" onclick="load_question();">Próxima questão</button>
+	<button type="button" id="btn_next1" class="btn btn-primary" disabled>Próxima questão</button>
 
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModalq2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,19 +59,27 @@
 </body>
 
 <script type="text/javascript">
-	function load_question(){
-		$('#exampleModalq2').modal({backdrop: 'static', keyboard: false});
-	}
-
-	$("#exampleModalq2").on("hidden.bs.modal", function () {
-    	$('#content').load('q2.html');		
+	$(document).ready(function() {
+		$('.alert').hide();
 	});
+	
+	$('#btn_next1').click(function(){
+		$('#exampleModalq2').modal({backdrop: 'static', keyboard: false});
+	});
+	$("#exampleModalq2").on("hidden.bs.modal", function () {
+		$('#content').load('q2.html');		
+	});
+	
 	
 	// Verificar qual radio está marcado e gravar no array
 	$('#response').click(function() {
 		var result = $("input:radio[name ='customRadio']:checked").val();
 		list.push(result);
+		$('#btn_next1').prop('disabled', false);
+		$('#response').prop('disabled', true);
+		$(".alert").show();
 	});
+	
 	
 </script>
 </html>
